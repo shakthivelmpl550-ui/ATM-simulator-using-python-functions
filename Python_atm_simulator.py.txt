@@ -1,0 +1,48 @@
+accounts = {
+    "1234": 5000,#Shankar 
+    "5678": 3000,#balaji
+    "9012": 7000,#Shakthivel
+    "8940": 6,   #Kavin
+    "0418": 5000 #Sakthivel
+}
+def main_menu(pin):
+    while True:
+        print("\n--- ATM Menu ---")
+        print("1. Check Balance")
+        print("2. Deposit")
+        print("3. Withdraw")
+        print("4. Exit")
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            check_balance(pin)
+        elif choice == "2":
+            deposit(pin)
+        elif choice == "3":
+            withdraw(pin)
+        elif choice == "4":
+            print("Thank you for using our ATM!")
+            break
+        else:
+            print("Invalid choice! Try again.")
+def check_balance(pin):
+    print("Your current balance is: ", accounts[pin])
+def deposit(pin):
+    amount = int(input("Enter amount to deposit: "))
+    accounts[pin] += amount
+    print(" ", amount, "deposited successfully!")
+    check_balance(pin)
+def withdraw(pin):
+    amount = int(input("Enter amount to withdraw: "))
+    if amount <= accounts[pin]:
+        accounts[pin] -= amount
+        print(" ", amount, "withdrawn successfully!")
+    else:
+        print("Insufficient balance!")
+    check_balance(pin)
+# Login system
+pin = input("Enter your 4-digit PIN: ")
+if pin in accounts and accounts[pin] > 0:
+    print("Login successful!")
+    main_menu(pin)
+else:
+    print("Invalid PIN! Access denied.")
